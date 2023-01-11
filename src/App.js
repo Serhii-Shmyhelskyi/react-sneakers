@@ -21,9 +21,18 @@ function App() {
         </ul>
       </header>
       <div className="content">
-        <h1>Всі кросівки</h1>
+        <div className="contentSearch">
+          <h1>Всі кросівки</h1>
+          <div className="contentSearchBlock">
+            <img src="/img/search.svg" alt="Search" />
+            <input placeholder="Пошук..." type="text" />
+          </div>
+        </div>
         <div className="sneakersWrapper">
           <div className="card">
+            <div className="cardFavorite">
+              <img src="/img/heart-unliked.svg" alt="Unliked" />
+            </div>
             <img weight={133} height={112} src="/img/sneakers/1.jpg" alt="Sneakers" />
             <h5>Чоловічі кросівки Nike Blazer Mid Suede</h5>
             <div className='cardBottom'>
