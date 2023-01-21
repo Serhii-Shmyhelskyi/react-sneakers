@@ -221,6 +221,7 @@ header {
 
   .headerRightLiL {
     margin-right: 30px;
+    cursor: pointer;
   }
 }
 
@@ -234,6 +235,7 @@ header {
 
 .sneakersWrapper {
   display: flex;
+  flex-wrap: wrap;
 }
 
 
