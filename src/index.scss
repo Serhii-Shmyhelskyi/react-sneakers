@@ -238,8 +238,6 @@ header {
   flex-wrap: wrap;
 }
 
-
-
 .contentSearch {
   display: flex;
   align-items: center;
@@ -249,12 +247,25 @@ header {
 
 .contentSearchBlock {
   border: 1px solid #f3f3f3;
+  position: relative;
+  border-radius: 10px;
+
+  .clear {
+    position: absolute;
+    right: 0;
+    width: 18px;
+    height: 18px;
+    top: 14px;
+    right: 15px;
+    cursor: pointer;
+  }
 
   input {
     border: 0;
     padding: 13px;
     font-size: 16px;
     width: 200px;
+    border-radius: 10px;
   }
 }
 
