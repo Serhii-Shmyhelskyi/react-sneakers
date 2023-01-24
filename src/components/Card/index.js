@@ -3,9 +3,10 @@ import styles from './Card.module.scss';
 
 function Card({ title, pricer, imageUrl, onFavorite, onPlus }) {
     const [isAdded, setIsAdded] = React.useState(false);
+    const obj = { title, imageUrl, pricer };
 
     const onClicPlus = () => {
-        onPlus([title, pricer, imageUrl]);
+        onPlus(obj);
         setIsAdded(!isAdded);
     };
 

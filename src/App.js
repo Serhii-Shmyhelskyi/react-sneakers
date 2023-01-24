@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import Card from "./components/Card";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
@@ -10,20 +11,27 @@ function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
 
   React.useEffect(() => {
-    fetch("https://63cb9e105c6f2e1d84b8d12b.mockapi.io/items").then((res) => {
-      return res.json();
-    }).then(json => {
-      setItems(json);
+    //запит із сервера, для всіх карток
+    axios.get('https://63cb9e105c6f2e1d84b8d12b.mockapi.io/items').then((res) => {
+      setItems(res.data);
+    });
+    //запит із сервер, для корзини
+    axios.get('https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart').then((res) => {
+      setCartItems(res.data);
     });
   }, []);
 
   const onAddToCart = (obj) => {
-    setCartItems(prev => [...prev, obj])
-  }
+    //запит на сервер, для корзини
+    axios.post('https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart', obj);
+    setCartItems(prev => [...prev, obj]);
+    console.log(obj)
+  };
 
   const onRemoveItem = (id) => {
+    // axios.delete(`https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart/${id}`);
     setCartItems(prev => prev.filter(item => item.id !== id))
-  }
+  };
 
   return (
     <>
