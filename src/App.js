@@ -7,6 +7,7 @@ import Drawer from "./components/Drawer";
 function App() {
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
+  const [favorites, setSavorites] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState('');
   const [cartOpened, setCartOpened] = React.useState(false);
 
@@ -25,12 +26,17 @@ function App() {
     //запит на сервер, для корзини
     axios.post('https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart', obj);
     setCartItems(prev => [...prev, obj]);
-    console.log(obj)
   };
 
   const onRemoveItem = (id) => {
-    // axios.delete(`https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart/${id}`);
+    axios.delete(`https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart/${id}`);
     setCartItems(prev => prev.filter(item => item.id !== id))
+  };
+
+  const onAddToFavorite = (obj) => {
+    //запит на сервер, для обраного
+    axios.post('https://63cb9e105c6f2e1d84b8d12b.mockapi.io/favorites', obj);
+    setSavorites(prev => [...prev, obj]);
   };
 
   return (
@@ -56,7 +62,7 @@ function App() {
                   title={item.title}
                   pricer={item.price}
                   imageUrl={item.imageUrl}
-                  onFavorite={() => console.log('Добавили закладки')}
+                  onFavorite={(obj) => onAddToFavorite(obj)}
                   onPlus={(obj) => onAddToCart(obj)}
                 />
               ))}

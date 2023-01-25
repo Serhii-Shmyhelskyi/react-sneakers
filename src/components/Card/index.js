@@ -3,6 +3,8 @@ import styles from './Card.module.scss';
 
 function Card({ title, pricer, imageUrl, onFavorite, onPlus }) {
     const [isAdded, setIsAdded] = React.useState(false);
+    const [isFavorite, setIsFavorite] = React.useState(false);
+
     const obj = { title, imageUrl, pricer };
 
     const onClicPlus = () => {
@@ -10,10 +12,15 @@ function Card({ title, pricer, imageUrl, onFavorite, onPlus }) {
         setIsAdded(!isAdded);
     };
 
+    const onClickFsvorite = () => {
+        onFavorite(obj);
+        setIsFavorite(!isFavorite);
+    }
+
     return (
         <div className={styles.card}>
-            <div className={styles.cardFavorite} onClick={onFavorite}>
-                <img src="/img/heart-unliked.svg" alt="Unliked" />
+            <div className={styles.cardFavorite} onClick={onClickFsvorite}>
+                <img src={isFavorite ? "/img/liked.svg" : "/img/unliked.svg"} alt="Unliked" />
             </div>
             <img weight={133} height={112} src={imageUrl} alt="Sneakers" />
             <h5>{title}</h5>
