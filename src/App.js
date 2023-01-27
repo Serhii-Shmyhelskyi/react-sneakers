@@ -1,8 +1,9 @@
 import React from "react";
+import { Route } from 'react-router-dom';
 import axios from "axios";
-import Card from "./components/Card";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
+import Home from "./pages/Home";
 
 function App() {
   const [items, setItems] = React.useState([]);
@@ -44,30 +45,11 @@ function App() {
       <div className="wrapper clear">
         {cartOpened ? <Drawer onCloseItCart={onRemoveItem} items={cartItems} onClose={() => setCartOpened(false)} /> : null}
         <Header onClickCart={() => setCartOpened(true)} />
-        <div className="content">
-          <div className="contentSearch">
-            <h1>{searchValue ? `Пошук по запросу: "${searchValue}"` : 'Всі кросівки'}</h1>
-            <div className="contentSearchBlock">
-              <img src="/img/search.svg" alt="Search" />
-              {searchValue && <img onClick={() => setSearchValue('')} className="clear" src="/img/btn-remove.svg" alt="Clear" />}
-              <input onChange={(event) => setSearchValue(event.target.value)} value={searchValue} placeholder="Пошук..." type="text" />
-            </div>
-          </div>
-          <div className="sneakersWrapper">
-            {items
-              .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-              .map((item) => (
-                <Card
-                  key={item.imageUrl}
-                  title={item.title}
-                  pricer={item.price}
-                  imageUrl={item.imageUrl}
-                  onFavorite={(obj) => onAddToFavorite(obj)}
-                  onPlus={(obj) => onAddToCart(obj)}
-                />
-              ))}
-          </div>
-        </div>
+
+        <Route path="/" exact>
+          <Home />
+        </Route>
+
       </div >
     </>
   );
