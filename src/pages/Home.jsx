@@ -1,6 +1,11 @@
 import Card from "../components/Card";
 
-function Home() {
+function Home({ items,
+    searchValue,
+    setSearchValue,
+    onChangeSearchInput,
+    onAddToFavorite,
+    onAddToCart }) {
     return (
         <div className="content">
             <div className="contentSearch">
@@ -12,18 +17,14 @@ function Home() {
                 </div>
             </div>
             <div className="sneakersWrapper">
-                {items
-                    .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-                    .map((item) => (
-                        <Card
-                            key={item.imageUrl}
-                            title={item.title}
-                            pricer={item.price}
-                            imageUrl={item.imageUrl}
-                            onFavorite={(obj) => onAddToFavorite(obj)}
-                            onPlus={(obj) => onAddToCart(obj)}
-                        />
-                    ))}
+                {items.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase())).map((item) => (
+                    <Card
+                        key={item.imageUrl}
+                        onFavorite={(obj) => onAddToFavorite(obj)}
+                        onPlus={(obj) => onAddToCart(obj)}
+                        {...item}
+                    />
+                ))}
             </div>
         </div>
     )
