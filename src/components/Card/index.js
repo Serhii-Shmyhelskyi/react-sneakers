@@ -51,8 +51,6 @@ function Card({ id, title, price, imageUrl, onFavorite, onPlus, favorited = fals
                         <img className={styles.plus} onClick={onClicPlus} src={isItemAdded(id) ? "/img/btn-checked.svg" : "/img/btn-plus.svg"} alt="Plus" />
                     </div>
                 </>}
-
-
         </div>
     )
 }
