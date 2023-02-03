@@ -443,3 +443,9 @@ header {
   background-repeat: no-repeat;
   background-position: 0 -3px;
 }
+
+.wrapperItems {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}

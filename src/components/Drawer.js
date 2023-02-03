@@ -1,15 +1,16 @@
+import Info from "./Info";
+
 function Drawer({ onClose, items = [], onCloseItCart }) {
     return (
         <div className="overlay">
             <div className="drawer">
                 <h2>Кошик <img onClick={onClose} className="cartItemRemoveBtn" src="/img/btn-remove.svg" alt="Close" /></h2>
-
                 {
                     items.length > 0 ?
-                        <>
+                        <div className="wrapperItems">
                             <div className="items">
                                 {items.map((obj) => (
-                                    <div className="cartItem">
+                                    <div key={obj.id} className="cartItem">
                                         <div style={{ backgroundImage: `url(${obj.imageUrl})` }} className="cartItemImg">
                                         </div>
                                         <div className="cartItemWrapperT">
@@ -35,17 +36,10 @@ function Drawer({ onClose, items = [], onCloseItCart }) {
                                 </ul>
                                 <button className="greenButton">Оформити замовлення <img src="/img/arrow.svg" alt="Arrow" /> </button>
                             </div>
-                        </>
-                        :
-                        <div className="cartEmpty d-flex align-center justify-center flex-column flex">
-                            <img className="mb-20" width={150} height={120} src="/img/empty-cart.jpg" alt="Empty" />
-                            <h2>Корзина пуста</h2>
-                            <p className="opacity-6">Добавте хоча б одну пару кросівок, щоб зробити замовлення</p>
-                            <button className="greenButton">
-                                <img onClick={onClose} src="/img/arrow.svg" alt="Arrow" />
-                                Повернутися назад
-                            </button>
                         </div>
+                        : (
+                            <Info title='Корзина пуста' description='Добавте хоча б одну пару кросівок, щоб зробити замовлення' image='/img/empty-cart.jpg' />
+                        )
                 }
             </div>
         </div>
