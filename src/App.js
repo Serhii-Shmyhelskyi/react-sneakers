@@ -6,6 +6,7 @@ import Drawer from "./components/Drawer";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import AppContext from "./context";
+import Orders from "./pages/Orders";
 
 function App() {
   const [items, setItems] = React.useState([]);
@@ -18,8 +19,11 @@ function App() {
   React.useEffect(() => {
     async function fetchData() {
       //-------------------------------запит із сервер, для корзини--------------------------------------------
-      // -------------------корзина не працює, mocApi дає змогу лише для 2-х силок----------------------------- 
+
+
       const cartResponse = await axios.get('https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart');
+
+      //----------------------------------нужно оплатить mockApi--------------------------
 
       // const favoritesResponse = await axios.get('https://63cb9e105c6f2e1d84b8d12b.mockapi.io/favorites');
 
@@ -28,7 +32,6 @@ function App() {
       const itemsResponse = await axios.get('https://63cb9e105c6f2e1d84b8d12b.mockapi.io/items');
 
       setIsLoading(false);
-
       setCartItems(cartResponse.data);
       // setFavorites(favoritesResponse.data);
       setItems(itemsResponse.data);
@@ -79,15 +82,14 @@ function App() {
   }
 
   const isItemAdded = (id) => {
-    return cartItems.some(obj => Number(obj.id) == Number(id))
+    return cartItems.some(obj => Number(obj.id) === Number(id));
   }
 
   return (
     <>
-      <AppContext.Provider value={{ items, cartItems, favorites, isItemAdded, onAddToFavorite, setCartOpened, setCartItems }}>
+      <AppContext.Provider value={{ items, cartItems, favorites, isItemAdded, onAddToFavorite, onAddToCart, setCartOpened, setCartItems }}>
         <div className="wrapper clear">
           {cartOpened ? <Drawer
-            // onCloseItCart={onRemoveItem}
             items={cartItems}
             onRemove={onRemoveItem}
             onClose={() => setCartOpened(false)} /> : null}
@@ -106,6 +108,9 @@ function App() {
             />
             <Route path="/favorites" element={
               <Favorites />}
+            />
+            <Route path="/orders" element={
+              <Orders />}
             />
           </Routes>
         </div >

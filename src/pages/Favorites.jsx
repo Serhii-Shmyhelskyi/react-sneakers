@@ -12,9 +12,9 @@ function Favorites() {
                 <h1>Мої обрані</h1>
             </div>
             <div className="sneakersWrapper">
-                {favorites.map((item) => (
+                {favorites.map((item, index) => (
                     <Card
-                        key={item.imageUrl}
+                        key={index}
                         favorited={true}
                         onFavorite={onAddToFavorite}
                         {...item}
