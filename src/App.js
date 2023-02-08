@@ -18,46 +18,66 @@ function App() {
 
   React.useEffect(() => {
     async function fetchData() {
-      //-------------------------------запит із сервер, для корзини--------------------------------------------
+      try {
+        const [cartResponse, itemsResponse] = await Promise.all([
+          axios.get('https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart'),
+          //----------------------------------потрібно оплатити mockApi--------------------------
 
+          // ----------і добвити в масив favoritesResponse ----------------------
 
-      const cartResponse = await axios.get('https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart');
+          // axios.get('https://63cb9e105c6f2e1d84b8d12b.mockapi.io/favorites'),
+          axios.get('https://63cb9e105c6f2e1d84b8d12b.mockapi.io/items'),
+        ]);
 
-      //----------------------------------нужно оплатить mockApi--------------------------
-
-      // const favoritesResponse = await axios.get('https://63cb9e105c6f2e1d84b8d12b.mockapi.io/favorites');
-
-      //---------------------------------запит із сервера, для всіх карток------------------------------
-
-      const itemsResponse = await axios.get('https://63cb9e105c6f2e1d84b8d12b.mockapi.io/items');
-
-      setIsLoading(false);
-      setCartItems(cartResponse.data);
-      // setFavorites(favoritesResponse.data);
-      setItems(itemsResponse.data);
+        setIsLoading(false);
+        setCartItems(cartResponse.data);
+        //----------------------------------потрібно оплатити mockApi--------------------------
+        // setFavorites(favoritesResponse.data);
+        setItems(itemsResponse.data);
+      } catch (error) {
+        alert('Помилка при запросі даних ;(')
+        console.log(error);
+      }
     }
 
     fetchData();
   }, []);
 
-  const onAddToCart = (obj) => {
+  const onAddToCart = async (obj) => {
     //запит на сервер, для корзини
     try {
-      if (cartItems.find(item => Number(item.id) == Number(obj.id))) {
-        axios.delete(`https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart/${obj.id}`);
-        setCartItems((prev) => prev.filter(item => Number(item.id) !== Number(obj.id)))
+      const findItem = (cartItems.find(item => Number(item.parentId) == Number(obj.id)));
+      if (findItem) {
+        setCartItems((prev) => prev.filter(item => Number(item.parentId) !== Number(obj.id)));
+        const findItem = (cartItems.find(item => Number(item.parentId) == Number(obj.id)));
+        await axios.delete(`https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart/${findItem.id}`);
       } else {
-        axios.post('https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart', obj);
         setCartItems(prev => [...prev, obj]);
+        const { data } = await axios.post('https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart', obj);
+        setCartItems(prev => prev.map(item => {
+          if (item.parentId == data.parentId) {
+            return {
+              ...item,
+              id: data.id
+            };
+          }
+          return item;
+        }));
       }
     } catch (error) {
-      alert('Error 404')
+      alert('Помилка при добавлянні в корзину')
+      console.log(error);
     }
   };
 
   const onRemoveItem = (id) => {
-    axios.delete(`https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart/${id}`);
-    setCartItems(prev => prev.filter(item => item.id !== id))
+    try {
+      setCartItems(prev => prev.filter(item => Number(item.id) !== Number(id)));
+      axios.delete(`https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart/${id}`);
+    } catch (error) {
+      alert('Помилка при видалені з корзину')
+      console.log(error);
+    }
   };
 
   const onAddToFavorite = async (obj) => {
@@ -73,7 +93,7 @@ function App() {
       }
     } catch (error) {
       alert('Не вдалось добавити в обрані');
-      console.error(error);
+      console.log(error);
     }
   };
 
@@ -82,7 +102,7 @@ function App() {
   }
 
   const isItemAdded = (id) => {
-    return cartItems.some(obj => Number(obj.id) === Number(id));
+    return cartItems.some(obj => Number(obj.parentId) === Number(id));
   }
 
   return (
