@@ -42,7 +42,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
     return (
         <div className={`${styles.overlay} ${opened ? styles.overlayVisible : ''}`}>
             <div className={styles.drawer}>
-                <h2>Кошик <img onClick={onClose} className="cartItemRemoveBtn" src="/img/btn-remove.svg" alt="Close" /></h2>
+                <h2>Кошик <img onClick={onClose} className="cartItemRemoveBtn" src="img/btn-remove.svg" alt="Close" /></h2>
                 {
                     items.length > 0 ?
                         <div className="wrapperItems">
@@ -55,7 +55,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
                                             <p>{obj.title}</p>
                                             <b>{obj.price} грн</b>
                                         </div>
-                                        <img onClick={() => onRemove(obj.id)} className="cartItemRemoveBtn" src="/img/btn-remove.svg" alt="Remove" />
+                                        <img onClick={() => onRemove(obj.id)} className="cartItemRemoveBtn" src="img/btn-remove.svg" alt="Remove" />
                                     </div>
                                 ))}
                             </div>
@@ -72,11 +72,11 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
                                         <b>{rounded(totalPrice * 0.05)} грн</b>
                                     </li>
                                 </ul>
-                                <button disabled={isLoading} onClick={onClickOrder} className="greenButton">Оформити замовлення <img src="/img/arrow.svg" alt="Arrow" /> </button>
+                                <button disabled={isLoading} onClick={onClickOrder} className="greenButton">Оформити замовлення <img src="img/arrow.svg" alt="Arrow" /> </button>
                             </div>
                         </div>
                         : (
-                            <Info title={isOrderComplete ? 'Замовлення оформленне' : 'Корзина пуста'} description={isOrderComplete ? `Ваше замовлення № ${orderId} скоро буде передано в службу доставки` : 'Добавте хоча б одну пару кросівок, щоб зробити замовлення'} image={isOrderComplete ? '/img/complete-order.jpg' : '/img/empty-cart.jpg'} />
+                            <Info title={isOrderComplete ? 'Замовлення оформленне' : 'Корзина пуста'} description={isOrderComplete ? `Ваше замовлення № ${orderId} скоро буде передано в службу доставки` : 'Добавте хоча б одну пару кросівок, щоб зробити замовлення'} image={isOrderComplete ? 'img/complete-order.jpg' : 'img/empty-cart.jpg'} />
                         )
                 }
             </div>

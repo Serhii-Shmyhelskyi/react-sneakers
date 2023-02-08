@@ -31,8 +31,8 @@ function Home({
             <div className="contentSearch">
                 <h1>{searchValue ? `Пошук по запросу: "${searchValue}"` : 'Всі кросівки'}</h1>
                 <div className="contentSearchBlock">
-                    <img src="/img/search.svg" alt="Search" />
-                    {searchValue && <img onClick={() => setSearchValue('')} className="clear" src="/img/btn-remove.svg" alt="Clear" />}
+                    <img src="img/search.svg" alt="Search" />
+                    {searchValue && <img onClick={() => setSearchValue('')} className="clear" src="img/btn-remove.svg" alt="Clear" />}
                     <input onChange={onChangeSearchInput} value={searchValue} placeholder="Пошук..." type="text" />
                 </div>
             </div>
