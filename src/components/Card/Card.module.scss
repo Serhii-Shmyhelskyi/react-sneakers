@@ -49,3 +49,14 @@
 
     }
 }
+
+@media screen and (max-width: 590px) {
+    .card {
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 12px;
+    }
+}

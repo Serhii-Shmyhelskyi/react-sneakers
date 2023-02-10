@@ -433,3 +433,81 @@ header {
     opacity: 1;
   }
 }
+
+@media screen and (max-width: 590px) {
+  .content {
+    padding: 20px;
+
+    h1 {
+      font-size: 16px;
+      margin: 0;
+    }
+  }
+
+  .contentSearch {
+    margin-bottom: 15px;
+  }
+
+  .contentSearchBlock {
+    .clear {
+      position: absolute;
+      right: 0;
+      width: 18px;
+      height: 18px;
+      top: 14px;
+      right: 15px;
+      cursor: pointer;
+    }
+
+    input {
+      border: 0;
+      padding: 13px;
+      font-size: 12px;
+      width: 100px;
+      border-radius: 10px;
+    }
+  }
+
+  header {
+    padding: 15px;
+  }
+
+  .cartEmpty {
+
+    p {
+      width: 280px;
+      line-height: 20px;
+    }
+
+    .greenButton {
+      width: 200px;
+      margin-top: 20px;
+    }
+  }
+
+  .greenButton {
+    font-size: 12px;
+
+  }
+
+  header {
+    padding: 10px;
+
+    .headerLeftTexth3 {
+      font-size: 14px;
+    }
+
+    h3,
+    p {
+      font-size: 14px;
+    }
+
+    .headerRightLiL {
+      margin-right: 30px;
+    }
+
+    .headerRightHeart {
+      margin-right: 5px;
+    }
+  }
+}
