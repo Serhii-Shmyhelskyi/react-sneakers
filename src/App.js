@@ -19,17 +19,17 @@ function App() {
   React.useEffect(() => {
     async function fetchData() {
       try {
-        const [, favoritesResponse, itemsResponse] = await Promise.all([
+        const [itemsResponse, favoritesResponse] = await Promise.all([
           //------------------cartResponse- ---------buy mockapy------------
           // axios.get("https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart"),
-          axios.get("https://63cb9e105c6f2e1d84b8d12b.mockapi.io/favorites"),
           axios.get("https://63cb9e105c6f2e1d84b8d12b.mockapi.io//items"),
+          axios.get("https://63cb9e105c6f2e1d84b8d12b.mockapi.io/favorites"),
         ]);
 
         setIsLoading(false);
         // setCartItems(cartResponse.data);
-        setFavorites(favoritesResponse.data);
         setItems(itemsResponse.data);
+        setFavorites(favoritesResponse.data);
       } catch (error) {
         alert("Помилка при запиті даних ;(");
         console.log(error);
@@ -71,7 +71,7 @@ function App() {
         );
       }
     } catch (error) {
-      alert("Помилка при добавлянні в корзину");
+      // alert("Помилка при добавлянні в корзину");
       console.log(error);
     }
   };
@@ -83,7 +83,7 @@ function App() {
         prev.filter((item) => Number(item.id) !== Number(id))
       );
     } catch (error) {
-      alert("Помилка при видалені з корзину");
+      // alert("Помилка при видалені з корзину");
       console.error(error);
     }
   };
@@ -106,7 +106,7 @@ function App() {
         setFavorites((prev) => [...prev, data]);
       }
     } catch (error) {
-      alert("Не вдалось добавити в обрані");
+      // alert("Не вдалось добавити в обрані");
       console.error(error);
     }
   };

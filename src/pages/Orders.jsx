@@ -17,7 +17,7 @@ function Orders() {
         setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []));
         setIsLoading(false);
       } catch (error) {
-        alert("Помилка при запросі замовлення");
+        alert("Помилка, необхідно оплатити MOCKAPI");
         console.error(error);
       }
     })();
