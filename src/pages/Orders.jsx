@@ -12,7 +12,7 @@ function Orders() {
     (async () => {
       try {
         const { data } = await axios.get(
-          "https://63cb9e105c6f2e1d84b8d12b.mockapi.io/orders"
+          "https://5gvv2nmy7i.api.quickmocker.com/orders"
         );
         setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []));
         setIsLoading(false);

@@ -22,7 +22,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
     try {
       setIsLoading(true);
       const { data } = await axios.post(
-        "https://63cb9e105c6f2e1d84b8d12b.mockapi.io/orders",
+        "https://5gvv2nmy7i.api.quickmocker.com/orders",
         { items: cartItems }
       );
 
@@ -32,7 +32,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
       for (let i = 0; i < cartItems.length; i++) {
         const item = cartItems[i];
         await axios.delete(
-          "https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart" + item.id
+          "https://5gvv2nmy7i.api.quickmocker.com/cart" + item.id
         );
         await delay(1000);
       }

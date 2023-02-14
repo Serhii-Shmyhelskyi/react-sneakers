@@ -19,23 +19,19 @@ function App() {
   React.useEffect(() => {
     async function fetchData() {
       try {
-        const [cartResponse, itemsResponse] = await Promise.all([
-          axios.get("https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart"),
-          //----------------------------------потрібно оплатити mockApi--------------------------
-
-          // ----------і добвити в масив favoritesResponse ----------------------
-
-          // axios.get("https://63cb9e105c6f2e1d84b8d12b.mockapi.io/favorites"),
-          axios.get("https://63cb9e105c6f2e1d84b8d12b.mockapi.io/items"),
-        ]);
+        const [cartResponse, favoritesResponse, itemsResponse] =
+          await Promise.all([
+            axios.get("https://5gvv2nmy7i.api.quickmocker.com/cart"),
+            axios.get("https://5gvv2nmy7i.api.quickmocker.com/favorites"),
+            axios.get("https://5gvv2nmy7i.api.quickmocker.com/items"),
+          ]);
 
         setIsLoading(false);
         setCartItems(cartResponse.data);
-        //----------------------------------потрібно оплатити mockApi--------------------------
-        // setFavorites(favoritesResponse.data);
+        setFavorites(favoritesResponse.data);
         setItems(itemsResponse.data);
       } catch (error) {
-        alert("Помилка при запросі даних ;(");
+        alert("Помилка при запиті даних ;(");
         console.log(error);
       }
     }
@@ -57,12 +53,12 @@ function App() {
           (item) => Number(item.parentId) == Number(obj.id)
         );
         await axios.delete(
-          `https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart/${findItem.id}`
+          `https://5gvv2nmy7i.api.quickmocker.com/cart/${findItem.id}`
         );
       } else {
         setCartItems((prev) => [...prev, obj]);
         const { data } = await axios.post(
-          "https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart",
+          "https://5gvv2nmy7i.api.quickmocker.com/cart",
           obj
         );
         setCartItems((prev) =>
@@ -88,7 +84,7 @@ function App() {
       setCartItems((prev) =>
         prev.filter((item) => Number(item.id) !== Number(id))
       );
-      axios.delete(`https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart/${id}`);
+      axios.delete(`https://5gvv2nmy7i.api.quickmocker.com/cart/${id}`);
     } catch (error) {
       alert("Помилка при видалені з корзину");
       console.log(error);
@@ -100,14 +96,14 @@ function App() {
     try {
       if (favorites.find((FavObj) => Number(FavObj.id) === Number(obj.id))) {
         axios.delete(
-          `https://63cb9e105c6f2e1d84b8d12b.mockapi.io/favorites/${obj.id}`
+          `https://5gvv2nmy7i.api.quickmocker.com/favorites/${obj.id}`
         );
         setFavorites((prev) =>
           prev.filter((item) => Number(item.id) !== Number(obj.id))
         );
       } else {
         const { data } = await axios.post(
-          "https://63cb9e105c6f2e1d84b8d12b.mockapi.io/favorites",
+          "https://5gvv2nmy7i.api.quickmocker.com/favorites",
           obj
         );
         setFavorites((prev) => [...prev, data]);
