@@ -12,7 +12,7 @@ function Orders() {
     (async () => {
       try {
         const { data } = await axios.get(
-          "https://63eb32f5f1a969340db31aab.mockapi.io/orders"
+          "https://63cb9e105c6f2e1d84b8d12b.mockapi.io/orders"
         );
         setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []));
         setIsLoading(false);

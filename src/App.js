@@ -19,21 +19,20 @@ function App() {
   React.useEffect(() => {
     async function fetchData() {
       try {
-        const [cartResponse, itemsResponse, favoritesResponse] =
-          await Promise.all([
-            axios.get("https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart"),
-            //----------------------------------потрібно оплатити mockApi--------------------------
+        const [cartResponse, itemsResponse] = await Promise.all([
+          axios.get("https://63cb9e105c6f2e1d84b8d12b.mockapi.io/cart"),
+          //----------------------------------потрібно оплатити mockApi--------------------------
 
-            // ----------і добвити в масив favoritesResponse ----------------------
+          // ----------і добвити в масив favoritesResponse ----------------------
 
-            axios.get("https://63eb32f5f1a969340db31aab.mockapi.io/favorites"),
-            axios.get("https://63cb9e105c6f2e1d84b8d12b.mockapi.io/items"),
-          ]);
+          // axios.get("https://63cb9e105c6f2e1d84b8d12b.mockapi.io/favorites"),
+          axios.get("https://63cb9e105c6f2e1d84b8d12b.mockapi.io/items"),
+        ]);
 
         setIsLoading(false);
         setCartItems(cartResponse.data);
         //----------------------------------потрібно оплатити mockApi--------------------------
-        setFavorites(favoritesResponse.data);
+        // setFavorites(favoritesResponse.data);
         setItems(itemsResponse.data);
       } catch (error) {
         alert("Помилка при запросі даних ;(");
@@ -101,14 +100,14 @@ function App() {
     try {
       if (favorites.find((FavObj) => Number(FavObj.id) === Number(obj.id))) {
         axios.delete(
-          `https://63eb32f5f1a969340db31aab.mockapi.io/favorites/${obj.id}`
+          `https://63cb9e105c6f2e1d84b8d12b.mockapi.io/favorites/${obj.id}`
         );
         setFavorites((prev) =>
           prev.filter((item) => Number(item.id) !== Number(obj.id))
         );
       } else {
         const { data } = await axios.post(
-          "https://63eb32f5f1a969340db31aab.mockapi.io/favorites",
+          "https://63cb9e105c6f2e1d84b8d12b.mockapi.io/favorites",
           obj
         );
         setFavorites((prev) => [...prev, data]);

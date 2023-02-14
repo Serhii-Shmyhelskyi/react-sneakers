@@ -22,7 +22,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
     try {
       setIsLoading(true);
       const { data } = await axios.post(
-        "https://63eb32f5f1a969340db31aab.mockapi.io/orders",
+        "https://63cb9e105c6f2e1d84b8d12b.mockapi.io/orders",
         { items: cartItems }
       );
 
