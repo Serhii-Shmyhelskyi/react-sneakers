@@ -46,7 +46,6 @@ function Home({
             onChange={onChangeSearchInput}
             value={searchValue}
             placeholder="Пошук..."
-            type="text"
           />
         </div>
       </div>

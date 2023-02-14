@@ -49,9 +49,6 @@ function App() {
         setCartItems((prev) =>
           prev.filter((item) => Number(item.parentId) !== Number(obj.id))
         );
-        const findItem = cartItems.find(
-          (item) => Number(item.parentId) == Number(obj.id)
-        );
         await axios.delete(
           `https://5gvv2nmy7i.api.quickmocker.com/cart/${findItem.id}`
         );
@@ -63,7 +60,7 @@ function App() {
         );
         setCartItems((prev) =>
           prev.map((item) => {
-            if (item.parentId == data.parentId) {
+            if (item.parentId === data.parentId) {
               return {
                 ...item,
                 id: data.id,
@@ -81,13 +78,13 @@ function App() {
 
   const onRemoveItem = (id) => {
     try {
+      axios.delete(`https://5gvv2nmy7i.api.quickmocker.com/cart/${id}`);
       setCartItems((prev) =>
         prev.filter((item) => Number(item.id) !== Number(id))
       );
-      axios.delete(`https://5gvv2nmy7i.api.quickmocker.com/cart/${id}`);
     } catch (error) {
       alert("Помилка при видалені з корзину");
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -110,7 +107,7 @@ function App() {
       }
     } catch (error) {
       alert("Не вдалось добавити в обрані");
-      console.log(error);
+      console.error(error);
     }
   };
 

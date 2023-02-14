@@ -18,7 +18,7 @@ function Orders() {
         setIsLoading(false);
       } catch (error) {
         alert("Помилка при запросі замовлення");
-        console.log(error);
+        console.error(error);
       }
     })();
   }, []);
