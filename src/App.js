@@ -101,14 +101,14 @@ function App() {
     try {
       if (favorites.find((FavObj) => Number(FavObj.id) === Number(obj.id))) {
         axios.delete(
-          `https://63cb9e105c6f2e1d84b8d12b.mockapi.io/favorites/${obj.id}`
+          `https://63eb32f5f1a969340db31aab.mockapi.io/favorites/${obj.id}`
         );
         setFavorites((prev) =>
           prev.filter((item) => Number(item.id) !== Number(obj.id))
         );
       } else {
         const { data } = await axios.post(
-          "https://63cb9e105c6f2e1d84b8d12b.mockapi.io/favorites",
+          "https://63eb32f5f1a969340db31aab.mockapi.io/favorites",
           obj
         );
         setFavorites((prev) => [...prev, data]);
