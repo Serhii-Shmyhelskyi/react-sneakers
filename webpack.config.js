@@ -26,7 +26,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new HTMLWebpackPlugin({ template: "./src/index.html" }),
+    new HTMLWebpackPlugin({ template: "./public/index.html" }),
     new CleanWebpackPlugin(),
   ],
   module: {
@@ -36,12 +36,8 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        loader: "file-loader",
-        options: {
-          name: "/public/[name].[ext]",
-          name: "/public/sneakers/[name].[ext]",
-        },
+        test: /\.(jpg|jpeg|png|svg)/,
+        use: ["file-loader"],
       },
       {
         test: /\.m?js$/,
