@@ -8,9 +8,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "[name].[hash].js",
-    path: path.build,
-    filename: "app.bundle.js",
-    publicPath: path.build,
+    publicPath: "/public/",
   },
   devServer: {
     port: 3000,
