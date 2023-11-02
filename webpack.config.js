@@ -8,6 +8,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "[name].[hash].js",
+    path: path.build,
+    filename: "app.bundle.js",
+    publicPath: path.build,
   },
   devServer: {
     port: 3000,
@@ -36,8 +39,13 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
-        test: /\.(jpg|jpeg|png|svg)/,
-        use: ["file-loader"],
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: "file-loader",
+        options: {
+          name: "/public/[name].[ext]",
+          name: "/public/img/[name].[ext]",
+          name: "/public/img/sneakers/[name].[ext]",
+        },
       },
       {
         test: /\.m?js$/,
