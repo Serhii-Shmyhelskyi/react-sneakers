@@ -36,8 +36,11 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
-        test: /\.(jpg|jpeg|png|svg)/,
-        use: ["file-loader"],
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: "file-loader",
+        options: {
+          name: "/public/icons/[name].[ext]",
+        },
       },
       {
         test: /\.m?js$/,
