@@ -1,6 +1,7 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -8,7 +9,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "[name].[hash].js",
-    publicPath: "/public/",
   },
   devServer: {
     port: 3000,
@@ -29,6 +29,14 @@ module.exports = {
   plugins: [
     new HTMLWebpackPlugin({ template: "./public/index.html" }),
     new CleanWebpackPlugin(),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "public/img"),
+          to: path.resolve(__dirname, "build/img"),
+        },
+      ],
+    }),
   ],
   module: {
     rules: [
@@ -39,11 +47,6 @@ module.exports = {
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loader: "file-loader",
-        options: {
-          name: "/public/[name].[ext]",
-          name: "/public/img/[name].[ext]",
-          name: "/public/img/sneakers/[name].[ext]",
-        },
       },
       {
         test: /\.m?js$/,
